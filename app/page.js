@@ -1,22 +1,20 @@
-import Button from "@/components/Button";
-import { getUser } from "@/lib/actions/action";
-
-export const metadata = {
-  title: 'Home'
-};
+import { dbConnect } from '@/lib/dbConnect';
 
 export default async function Home() {
-  const users = await getUser();
+  let connection;
+  try {
+    connection = await dbConnect();
+  } catch (error) {
+    console.log(error);
+  }
+
   return (
-    <div className="m-2">
-      <Button />
-      <ul>
-      {
-        users.map(user => {
-          return <li>{user.name}</li>
-        })
-      }
-      </ul>
+    <div className='m-2'>
+      {connection ? (
+        <h1>Database is connected!</h1>
+      ) : (
+        <h1>Database NOT connected!</h1>
+      )}
     </div>
   );
 }

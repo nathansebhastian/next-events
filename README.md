@@ -10,6 +10,10 @@ First, run `npm install` to install the dependencies:
 npm install
 ```
 
+This application uses MongoDB, so please create a `.env` file in the project root folder and add your MongoDB connection string to it.
+
+You can copy and rename the `.env.sample` file added in this project.
+
 Then run the development server:
 
 ```bash
