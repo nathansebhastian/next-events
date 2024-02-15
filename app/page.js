@@ -1,20 +1,19 @@
-import { dbConnect } from '@/lib/dbConnect';
+import { getAllEvents } from '@/lib/actions/event.action';
+import EventCard from '@/components/EventCard';
 
 export default async function Home() {
-  let connection;
-  try {
-    connection = await dbConnect();
-  } catch (error) {
-    console.log(error);
-  }
+  const events = await getAllEvents();
 
   return (
-    <div className='m-2'>
-      {connection ? (
-        <h1>Database is connected!</h1>
-      ) : (
-        <h1>Database NOT connected!</h1>
-      )}
+    <div className='grid place-items-center w-full'>
+      <div className='max-w-6xl w-full py-12 px-4'>
+        <h2 className='text-3xl text-center font-bold'>Explore Events</h2>
+        <div className='grid lg:grid-cols-3 gap-4 mt-12'>
+          {events.map(event => {
+            return <EventCard event={event} key={event._id} />;
+          })}
+        </div>
+      </div>
     </div>
   );
 }
