@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createEvent } from '@/lib/actions/event.action';
+import { createEvent, updateEvent } from '@/lib/actions/event.action';
 import { useUploadThing } from '@/lib/uploadthing';
 import { ImageUploader } from './ImageUploader';
 import { toast } from 'react-hot-toast';
@@ -64,6 +64,24 @@ export default function EventForm({ userId, type, event, eventId }) {
         }
       } catch (error) {
         toast.error('Addition Error!');
+        console.log(error);
+      }
+    }
+
+    if (type === 'Update') {
+      try {
+        const updatedEvent = await updateEvent({
+          userId,
+          event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
+          path: `/events/${eventId}`,
+        });
+
+        if (updatedEvent) {
+          toast.success('Event Updated');
+          router.push(`/events/${updatedEvent._id}`);
+        }
+      } catch (error) {
+        toast.error('Update Error!');
         console.log(error);
       }
     }
