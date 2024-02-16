@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
 import { FaSearch } from 'react-icons/fa';
 import Search from './Search';
+import { Suspense } from 'react'
 
 const Navbar = () => {
   const { status, data: session } = useSession();
@@ -24,7 +25,9 @@ const Navbar = () => {
       </div>
       <div className='navbar-center'>
         <div className='hidden md:block w-[32rem]'>
-          <Search />
+          <Suspense>
+            <Search />
+          </Suspense>
         </div>
         <div className='md:hidden'>
           <div
@@ -38,7 +41,9 @@ const Navbar = () => {
             id='searchDropdown'
             className='hidden absolute mt-2 left-1/4 bg-white p-2 rounded shadow-md w-72'
           >
-            <Search />
+            <Suspense>
+              <Search />
+            </Suspense>
           </div>
         </div>
       </div>

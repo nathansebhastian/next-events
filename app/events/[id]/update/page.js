@@ -5,6 +5,10 @@ import { authConfig } from '@/app/api/auth/[...nextauth]/authConfig';
 import { getEventById } from '@/lib/actions/event.action';
 import { redirect } from 'next/navigation';
 
+export const metadata = {
+  title: 'Update Event | Next Events'
+};
+
 export default async function UpdateEvent({ params: { id } }) {
   let userId = '';
   const data = await getServerSession(authConfig);
