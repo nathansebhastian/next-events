@@ -1,5 +1,9 @@
 import SignUpForm from "@/components/SignUpForm";
 
+export const metadata = {
+  title: 'Sign Up | Next Events'
+};
+
 export default async function SignUp() {
   return (
     <div className='mt-12 mx-auto w-full max-w-[500px] p-4 bg-slate-100'>

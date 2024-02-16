@@ -8,6 +8,14 @@ import { getServerSession } from 'next-auth';
 import EventDetail from '@/components/EventDetail';
 import EventCard from '@/components/EventCard';
 
+export async function generateMetadata({ params : { id }}) {
+  const event = await getEventById(id);
+ 
+  return {
+    title: event.title,
+  }
+}
+
 export default async function SingleEvent({ params: { id } }) {
   const event = await getEventById(id);
 

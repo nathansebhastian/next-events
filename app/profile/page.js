@@ -5,6 +5,10 @@ import UserForm from '@/components/UserForm';
 import { getEventsByUser } from '@/lib/actions/event.action';
 import EventCard from '@/components/EventCard';
 
+export const metadata = {
+  title: 'Profile | Next Events'
+};
+
 export default async function Profile() {
   let user = {};
   let events = [];
