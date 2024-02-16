@@ -4,9 +4,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
+import { FaSearch } from 'react-icons/fa';
+import Search from './Search';
 
 const Navbar = () => {
   const { status, data: session } = useSession();
+
+  const toggleMobileSearch = () => {
+    var searchDropdown = document.getElementById('searchDropdown');
+    searchDropdown.classList.toggle('hidden');
+  }
+
   return (
     <div className='navbar bg-base-100 shadow-md'>
       <div className='navbar-start'>
@@ -15,7 +23,24 @@ const Navbar = () => {
         </Link>
       </div>
       <div className='navbar-center'>
-        Search Bar here
+        <div className='hidden md:block w-[32rem]'>
+          <Search />
+        </div>
+        <div className='md:hidden'>
+          <div
+            id='searchIcon'
+            className='btn btn-ghost'
+            onClick={toggleMobileSearch}
+          >
+            <FaSearch size="1.5rem" />
+          </div>
+          <div
+            id='searchDropdown'
+            className='hidden absolute mt-2 left-1/4 bg-white p-2 rounded shadow-md w-72'
+          >
+            <Search />
+          </div>
+        </div>
       </div>
       <div className='navbar-end'>
         {status === 'authenticated' && (

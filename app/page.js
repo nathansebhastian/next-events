@@ -1,8 +1,9 @@
 import { getAllEvents } from '@/lib/actions/event.action';
 import EventCard from '@/components/EventCard';
 
-export default async function Home() {
-  const events = await getAllEvents();
+export default async function Home({ searchParams }) {
+  const query = searchParams?.query;
+  const events = await getAllEvents(query);
 
   return (
     <div className='grid place-items-center w-full'>
